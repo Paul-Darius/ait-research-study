@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 2.8)
+project( FaceRecognizer )
+find_package( OpenCV REQUIRED )
+add_executable( FaceRecognizer DisplayImage.cpp )
+target_link_libraries( FaceRecognizer ${OpenCV_LIBS} )
