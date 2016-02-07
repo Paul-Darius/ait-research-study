@@ -2,4 +2,3 @@
 
 cmake .
 make
-./bin/FaceDetector

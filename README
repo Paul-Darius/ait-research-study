@@ -1,6 +1,9 @@
 Installation : chmod+x install.sh ; ./install.sh
-Generate Database of faces for MBK_Videos in "Database" in the current directory : chmod +x generate_database.sh /generate_database.sh
+Generate Database : chmod +x generate_database.sh /generate_database.sh /path/to/database
 
-NB: This project is going to evolve A LOT. What is in there at the moment (3rd february 2016) has probably NO LINK with what it should be in April/May.
+Creator/Contributor : Paul-Darius Sarmadi <sarmadipauldarius@gmail.com> 2016
 
-Contributor : Paul-Darius Sarmadi <sarmadipauldarius@gmail.com> 2016
+N.B.: 
+1) This project is going to evolve A LOT. What is in there at the moment (7th february 2016) has probably NO LINK with what it should be in April/May.
+
+2) The database is private and not given there. What those scripts do is to take all the .avi files from a directory called "MBK

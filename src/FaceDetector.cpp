@@ -25,7 +25,7 @@ double max_face_size=300;
 
 void help()
 {
-	printf("This software takes the video contained in the directory MBK_Videos, detect all the faces there and save it in the directory Result. It is not supposed to be used directly but through the file named generate_database.sh\n");
+	cout << "This software is supposed to be use indirectly, within the script generate_database.sh. Please read the readme file." << endl;
 }
 
 int main(int argc, char* argv[])
@@ -39,12 +39,10 @@ int main(int argc, char* argv[])
 	string video_string=video_string_with_slashes;
 	for (int i=0; i<video_string.size();i++)
 	{
-		if (video_string[i] == '/')
+		if (video_string[i] == '/' || video_string[i] == ' ')
 			video_string[i]='-';
 	}
-	cout << video_string << endl;
-	cout << "HELLOOOOOOOOO" << endl;
-	cout << video_string_with_slashes;
+
 	if( !face_cascade.load( face_cascade_name ) ){ printf("--(!)Error loading\n"); return -1; };
 	if( !profile_cascade.load( profile_cascade_name ) ){ printf("--(!)Error loading\n"); return -1; };	
 
@@ -57,11 +55,11 @@ int main(int argc, char* argv[])
 	namedWindow("Initial",WINDOW_NORMAL);
 	VideoWriter outputVideo;
 	
-	system("mkdir Database");
-	
-	string command = "mkdir Database/"+video_string+"; mkdir Database/"+video_string+"/video";
-	
-	system(command.c_str());
+	string command1 = "mkdir Database/"+video_string+";";
+	string command2 = "mkdir Database/"+video_string+"/video;";
+	system(command1.c_str());
+	system(command2.c_str());
+
 
 	const string VIDEO_NAME = "Database/"+video_string+"/video/"+"detected.avi";
 	
