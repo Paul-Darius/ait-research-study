@@ -1,5 +1,5 @@
 Installation : chmod+x install.sh ; ./install.sh
-Generate Database : chmod +x generate_database.sh /generate_database.sh /path/to/database
+Generate Database : chmod +x generate_database.sh; /generate_database.sh /path/to/database
 
 Creator/Contributor : Paul-Darius Sarmadi <sarmadipauldarius@gmail.com> 2016
 
