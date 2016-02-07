@@ -16,21 +16,24 @@ double max_face_size=300;
  string NumberToString ( int Number );
 
  /** Global variables */
- String face_cascade_name = "haarcascade_frontalface_alt.xml";
- String profile_cascade_name = "haarcascade_profileface.xml";
+ String face_cascade_name = "src/others/haarcascade_frontalface_alt.xml";
+ String profile_cascade_name = "src/others/haarcascade_profileface.xml";
  
  CascadeClassifier face_cascade;
  CascadeClassifier profile_cascade;
 
 void help()
 {
-	printf("This software takes the video contained in the directory MBK_Videos, detect all the faces there and save it in the directory Result.");
+	printf("This software takes the video contained in the directory MBK_Videos, detect all the faces there and save it in the directory Result. It is not supposed to be used directly but through the file named generate_database.sh");
 }
 
-int main(int, char**)
+int main(int argc, char* argv[])
 {
-	help();
-	
+	if (argc != 2)
+	{
+		help();
+		return -1;
+	}
 	if( !face_cascade.load( face_cascade_name ) ){ printf("--(!)Error loading\n"); return -1; };
 	if( !profile_cascade.load( profile_cascade_name ) ){ printf("--(!)Error loading\n"); return -1; };	
 	
@@ -80,9 +83,7 @@ Mat detectAndDisplay( Mat frame, string str, int frame_number)
   //-- Detect faces
    face_cascade.detectMultiScale( frame, faces, 1.2, 2, 0|CV_HAAR_SCALE_IMAGE, Size(min_face_size, min_face_size),Size(max_face_size, max_face_size) );
    profile_cascade.detectMultiScale( frame, faces_profile, 1.2, 2, 0|CV_HAAR_SCALE_IMAGE, Size(min_face_size, min_face_size),Size(max_face_size, max_face_size) );
- // Draw circles on the detected faces
- // First for front faces
-  
+
   for( int i = 0; i < faces.size(); i++ )
 	{
 		Rect_ROI = Mat(frame,faces[i]);
