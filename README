@@ -1,4 +1,6 @@
-Installation and launch: ./install.sh
-Launch after installation: ./FaceRecognizer
+Installation : chmod+x install.sh ; ./install.sh
+Generate Database of faces for MBK_Videos in "Database" in the current directory : chmod +x generate_database.sh /generate_database.sh
 
 NB: This project is going to evolve A LOT. What is in there at the moment (3rd february 2016) has probably NO LINK with what it should be in April/May.
+
+Contributor : Paul-Darius Sarmadi <sarmadipauldarius@gmail.com> 2016
