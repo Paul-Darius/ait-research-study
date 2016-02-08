@@ -3,7 +3,11 @@ The purpose of this software is to detect faces on a database given by the user 
 Finally, people known as dangerous will be detected in this database. This last part is not created yet.
 
 Installation : chmod+x install.sh ; ./install.sh
-Generate Database : chmod +x generate_database.sh; /generate_database.sh /path/to/database
+Generate Database : chmod +x generate_database.sh; /generate_database.sh /path/to/database [demo_mode]
+
+-> /path/to/database is either an absolute path to the database or a relative path fromthe current directory
+
+-> demo_mode is an option to decide whether you want to see in live and save in the Database directory a video showing you the database generation or not. If the demo mode is set, the generation will be slower but you will see in a window what the algorithm is doing. If the value is not set or set to 0, the database will be generated without video. If the value is set to any other number, the demo mode is activated.
 
 Creator/Contributor : Paul-Darius Sarmadi <sarmadipauldarius@gmail.com> 2016
 
