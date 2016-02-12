@@ -9,8 +9,8 @@ using namespace std;
 
 /** Constants used for detectAndDisplay */ 
 
-double min_face_size=10;
-double max_face_size=300;
+double min_face_size=20;
+double max_face_size=200;
 
  /** Function Headers */
  Mat detectAndDisplay( Mat frame, string window_name, int frame_number, string video_string, int demo_mode);
@@ -78,16 +78,26 @@ int main(int argc, char* argv[])
 	int frame_number = 1;
 	Mat outputFrame;
 	cout << video_string << "'s face detection engaged. Be patient, the process may take from several minutes to few hours.\n" << endl;
+	int total_number_of_frames = cap.get(CV_CAP_PROP_FRAME_COUNT);
+	int current_frame;
+	
+	
     while(1)
     {
+		current_frame = cap.get(CV_CAP_PROP_POS_FRAMES);
+		cout << (float)current_frame/(float)total_number_of_frames*100 << "%" << endl;
         cap >> frame; // get a new frame from camera
+        if(frame.empty())
+        {
+            break;
+        }
         if (demo_mode)
 			imshow("Initial", frame);
 		outputFrame = detectAndDisplay(frame, "Result", frame_number, video_string, demo_mode);
         if (demo_mode)
 			outputVideo.write(outputFrame);
+		frame_number++;
         if(waitKey(10) >= 0) break;
-        frame_number++;
     }
 
 	cout << video_string << "is Done.\n" << endl;
