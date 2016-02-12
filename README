@@ -3,7 +3,11 @@ The purpose of this software is to detect faces on a database given by the user 
 Finally, people known as dangerous will be detected in this database. This last part is not created yet.
 
 Installation : chmod+x install.sh ; ./install.sh
-Generate Database : chmod +x generate_database.sh; /generate_database.sh /path/to/database [demo_mode]
+Generate Database : chmod +x generate_database.sh; ./generate_database.sh /path/to/database [demo_mode]
+
+Then modify the labels of the file "Database/Caffe_Files/full_database.txt" as you want.
+
+Generate Train and Validate caffe files : chmod +x trainandval.sh ;  ./trainandval.sh
 
 -> /path/to/database is either an absolute path to the database or a relative path fromthe current directory
 
