@@ -9,4 +9,6 @@ elif [ $# -eq 1 ]; then
 elif [ $# -eq 2 ]; then
 	find $1/ -iname '*.avi' -exec ./bin/FaceDetector {} $2 \;
 fi
+python src/python/fulldbfile.py
+echo -e "All the videos have been processed. The generation of the database is complete!\n";
 echo -e "All the videos have been processed. The generation of the database is complete!\n";
