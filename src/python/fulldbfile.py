@@ -3,6 +3,7 @@ import os
 first_level_in_database = []
 second_level = []
 k=0
+
 for (dirpath, dirnames, filenames) in os.walk("../../Database"):
     first_level_in_database.extend(dirnames)
     break
@@ -11,8 +12,6 @@ for i in range(0,len(first_level_in_database)):
 	for root, dirs, files in os.walk(os.path.abspath("../../Database/"+first_level_in_database[i])):
 		for file in files:
 			second_level.append(os.path.join(root, file))
-
-second_level[3]
 
 if not os.path.exists("../../Database/Caffe_Files"):
     os.makedirs("../../Database/Caffe_Files")
