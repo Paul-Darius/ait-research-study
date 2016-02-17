@@ -13,11 +13,15 @@ Generate Database : chmod +x generate_database.sh; ./generate_database.sh /path/
 
 Then modify the labels of the file "Database/Caffe_Files/full_database.txt" as you want.
 
+Attention: The next script needs to add caffe to your path: export PATH="/path/to/caffe/build/tools:$PATH"
+
 Generate Train and Validate caffe files : chmod +x trainandval.sh ;  ./trainandval.sh
 
 The Database directory contains the database of faces sorted by the video.
 
 The Database_Final directory contains the database of faces sorted to create a leveldb or lmdb database which is used with caffe.
+
+The leveldb files -database format used by caffe- are in src/siamese_mbk/ 
 
 Creator/Contributor : Paul-Darius Sarmadi <sarmadipauldarius@gmail.com> 2016
 
