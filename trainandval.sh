@@ -1,2 +1,7 @@
-python src/python/trainandval.py
-./src/siamese_mbk/create_siamese_mbk.sh
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+    python src/python/trainandval.py
+elif [ $# -eq 1 ]; then
+    python src/python/trainandval.py $1
+fi

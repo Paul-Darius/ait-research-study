@@ -7,14 +7,8 @@ layer {
   include {
     phase: TRAIN
   }
-  transform_param {
-    mirror: true
-    crop_size: 227
-    mean_file: "mean.binaryproto"
-  }
-
   image_data_param {
-    source: “Database/Caffe_files/train1.txt”
+    source: "Database/Caffe_files/train1.txt"
     batch_size: 32 
   }
 }
@@ -26,11 +20,6 @@ layer {
   top: "dummy_labels"
   include {
     phase: TRAIN
-  }
-  transform_param {
-    mirror: true
-    crop_size: 227
-    mean_file: "mean.binaryproto"
   }
   image_data_param {
     source: "Database/Caffe_files/train2.txt"
@@ -46,11 +35,6 @@ layer {
   include {
     phase: TEST
   }
-  transform_param {
-    mirror: false
-    crop_size: 227
-    mean_file: "mean.binaryproto"
-  }
   image_data_param {
     source: "Database/Caffe_files/test1.txt"
     batch_size: 320 
@@ -65,11 +49,6 @@ layer {
   include {
     phase: TEST
   }
-  transform_param {
-    mirror: false
-    crop_size: 227
-    mean_file: "mean.binaryproto"
-  }
   image_data_param {
     source: "Database/Caffe_files/test2.txt"
     batch_size: 320
@@ -79,7 +58,7 @@ layer {
 layer {
   name: "conv1"
   type: "Convolution"
-  bottom: "data_1”
+  bottom: "data_1"
   top: "conv1"
   param {
     name: "conv1_w"
@@ -226,7 +205,7 @@ layer {
 layer {
   name: "conv1_p"
   type: "Convolution"
-  bottom: "data_2”
+  bottom: "data_2"
   top: "conv1_p"
   param {
     name: "conv1_w"

@@ -11,21 +11,45 @@ Generate Database : chmod +x generate_database.sh; ./generate_database.sh /path/
 -> demo_mode is an option to decide whether you want to see in live and save in the Database directory a video showing you the database generation or not. If the demo mode is set, the generation will be slower but you will see in a window what the algorithm is doing. If the value is not set or set to 0, the database will be generated without video. If the value is set to any other number, the demo mode is activated.
 
 
-Then modify the labels of the file "Database/Caffe_Files/full_database.txt" as you want.
+Then modify the labels of the file "Database/Caffe_Files/full_database.txt" as you want. You can modify it either directly in the files or through a script.
 
-Attention: The next script needs to add caffe to your path: export PATH="/path/to/caffe/build/tools:$PATH"
+FOR SIAMESE NETWORK ONLY:
+———
 
-Generate Train and Validate caffe files : chmod +x trainandval.sh ;  ./trainandval.sh
+-> python /src/python/labelisation.py : Assuming that the label of your files is the first  character of their name (ie for example 1Frame2.jpg has label 1 and 4Frame23.jpg has label 4) this will generate a new database file called labelised_full_database.txt in the directory Database/Caffe_File with the required labels.
+
+-> mv Database/Caffe_Files/full_database.txt Database/Caffe_Files/full_database_old.txt
+-> mv Database/Caffe_Files/labelised_full_database.txt Database/Caffe_Files/full_database.txt
+
+——
+
+Generate Train and Validate caffe files : chmod +x trainandval.sh;  ./trainandval.sh [number_of_files]
+
+-> number_of_files is an option. If it is set to 1, then only a train.txt file will be generated as a copy of full_database.txt. If it is set to 2, then train.txt and test.txt will be generated. These two files will contain the same number of lines, i.e. the same number of files (plus or minus one). Finally, if it is set to 3, it will contain train.txt, test.txt, and valid.txt. The three files will have the same size.
+
+FOR THE SIAMESE NETWORK:
+
+———
+
+Files generation from train.txt and test.txt. For this usage, you should have done “./trainandval.sh 2” previously.
+-> python /src/python/create_siamese_db.py : It will create the train1.txt, train2.txt, test1.txt and test2.txt files required by the siamese network.
+
+-> Then :
+for name in Database/*/*.jpg; do
+convert -resize 256x256\! $name $name
+echo $name
+done
+
+The goal is to resize the images of the database. Modify the path “Database/*/*.jpg” if necessary.
+
+-> ./src/siamese/train_siamese_mbk.sh for training
+
+——
+
 
 The Database directory contains the database of faces sorted by the video.
-
-The Database_Final directory contains the database of faces sorted to create a leveldb or lmdb database which is used with caffe.
-
-The leveldb files -database format used by caffe- are in src/siamese_mbk/ 
 
 Creator/Contributor : Paul-Darius Sarmadi <sarmadipauldarius@gmail.com> 2016
 
 N.B.: 
 1) This project is going to evolve A LOT. What is in there at the moment (7th february 2016) has probably NO LINK with what it should be in April/May.
-
-2) The database is private and not given there. What those scripts do is to take all the .avi files from a directory called "MBK

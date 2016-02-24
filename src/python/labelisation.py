@@ -13,13 +13,13 @@ while 1:
 	source,_,label = txt.rpartition(' ')
 	name = source.rsplit('/', 1)[-1]
 	if name[0]=='1':
-		labelised_full_db.write(source+name+' 1\n')
+		labelised_full_db.write(source+' 1\n')
 	elif name[0]=='2':
-		labelised_full_db.write(source+name+' 2\n')
+		labelised_full_db.write(source+' 2\n')
 	elif name[0]=='3':
-		labelised_full_db.write(source+name+' 3\n')
+		labelised_full_db.write(source+' 3\n')
 	else:
-		labelised_full_db.write(source+name+' 0\n')
+		labelised_full_db.write(source+' 0\n')
 
 full_db.close()
 labelised_full_db.close()
