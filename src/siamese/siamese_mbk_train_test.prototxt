@@ -9,7 +9,7 @@ layer {
   }
   image_data_param {
     source: "Database/Caffe_files/train1.txt"
-    batch_size: 32 
+    batch_size: 320
   }
 }
 
@@ -17,13 +17,13 @@ layer {
   name: "data_2"
   type: "ImageData"
   top: "data_2"
-  top: "dummy_labels"
+  top: "sim2"
   include {
     phase: TRAIN
   }
   image_data_param {
     source: "Database/Caffe_files/train2.txt"
-    batch_size: 32 
+    batch_size: 320
   }
 }
 
@@ -45,7 +45,7 @@ layer {
   name: "data_2"
   type: "ImageData"
   top: "data_2"
-  top: "dummy_labels"
+  top: "sim2"
   include {
     phase: TEST
   }
@@ -354,7 +354,7 @@ layer {
   type: "ContrastiveLoss"
   bottom: "feat"
   bottom: "feat_p"
-  bottom: "sim"
+  bottom: "sim2"
   top: "loss"
   contrastive_loss_param {
     margin: 1
