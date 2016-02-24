@@ -33,7 +33,6 @@ flines2= open('Database/Caffe_Files/train2.txt', 'w+')
 
 while 1:
 	txt = concat2.readline()
-	print txt
 	if txt =='':
 		break
 	line1,_,line2 = txt.rpartition('@')
