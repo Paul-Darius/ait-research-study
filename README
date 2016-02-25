@@ -1,6 +1,6 @@
 The purpose of this software is to detect faces on a database given by the user -database of .avi videos-. The software will create a "Database" directory filled with .jpg images of the detected faces.
 
-Finally, people known as dangerous will be detected in this database. This last part is not created yet.
+Finally, people known as dangerous are detected in this database.
 
 Installation : chmod+x install.sh ; ./install.sh
 Generate Database : chmod +x generate_database.sh; ./generate_database.sh /path/to/database/ [demo_mode]

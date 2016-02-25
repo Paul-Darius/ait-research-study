@@ -1,10 +1,10 @@
-name: "mnist_siamese"
+name: "siamese_mbk"
 input: "data"
 input_shape {
-  dim: 10000
   dim: 1
-  dim: 28
-  dim: 28
+  dim: 3
+  dim: 256
+  dim: 256
 }
 layer {
   name: "conv1"
