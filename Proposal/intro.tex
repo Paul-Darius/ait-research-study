@@ -3,48 +3,15 @@
 \chapter{Introduction}
 
 \section{Background}
-\cite[p. 2]{yamato92hmm} Today travelling on road is still a main option for people in Thailand. Unfortunately, there are problems which must be taken to account. One of the major issues is a high traffic congestion that the authority sections have tried to solve for a long time.
 
-As a result, a transportation planning model is necessary that is used to represent demands of thousands of travellers who make decisions on how, when and where to travel according to the limited choices they have. The decisions will affect to the road network. Therefore, traffic engineers use the model to estimate the number of trips on transportation system alternative in the future which help in plannings, investment analysis and environmental impacts.
 
-In the past, people observe the density of vehicles by vision, traffic reports and collected statistic at times where there is no solid data, the exact number of vehicles, which is a problem to organize traffic flow. Thus, we need a way to collect the exact data for traffic planing.
+Cameras are everywhere. In front of any store, any business. In any streets. They are used for several purposes :
+After a crime has been commited as clues or proofs. The goal is to get more informations on the person or on the events that happened. 
+Before a crime. Typically, to dissuade potential thieves from stealing anything. Sometimes, the cameras used are not working, not recording, or pure fakes.
 
-Large-scale traffic data monitoring and analysis is software system implemented with Apache Hadoop platform which gathers a stream massive volume of vehicle data on the roads, from origin to destination, to generate the useful knowledge (transportation matrix) for transportation engineers to improve, for example, traffic flow efficiency, logistic operation analysis or road construction and etc.
-
-\nocite{web:transportation_model}
+The number of cameras is growing
 
 \section{Problem Statement}
-
-Many approaches have been applied but there has not yet been completely fixed. One of the reasons is because of the poor correlation of theoretical models to actual observed traffic flows, the transportation planners need to collect real traffic data, one of them is the volume of how many vehicles travelling from one to another end of the road in the road network in specific time. However, there are some challenges.
-
-\begin{enumerate}
-	\item Since there is tremendous amount of data, the data-store need to be huge and manageable.
-	\item A high volume of data keep increasing in the future is expected. Therefore the data storage is required to support scalability including tolerance to unexpected situations.
-	\item For analysis perspective, there would be very low performance as the amount of data is big.
-\end{enumerate}
-
-The possible technical solution is to develop an application/service talks to the existing image processing system which has already connected to the highway cameras. The collected data is processed and re-arranged, then kept into Hadoop cluster. When it is time to analyze, the application/service starts MapReduce jobs to present the Origin-Destination (O/D) matrix at times. 
-
-This research takes all of these points as a motivation to implement an application and distributed system in order to help traffic engineers fulfilling their aims.
-
-\section{Objectives}
-The main goal of my research is to develop an application or service to collect vehicle data that use express ways in Thailand, apply the Origin-Destination matrix to provide the number of trips from different ends, to help transportation section to analyze for the traffic solutions.
-
-\begin{enumerate}
-	\item Designs and prototypes a distributed system connecting to the existing image processing system which collects license plated information to provide the transportation matrix of the number of vehicles from road ends.
-	\item Develops and prototypes a web application/service using Apache Hadoop platform as an infrastructure.
-	\item Tests and evaluates the result.
-\end{enumerate}
-
-\section{Limitations and Scope}
-
-The scope of this research is a prototype software which can collect vehicles' information from the existing image processing system, keep them in Hadoop cluster, and generate the Origin-Destination matrix without focusing on how license plate numbers from vehicles' images can be produced. There are also limitations, which are:
-
-\begin{enumerate}
-    \item Since the limitation in resources, cameras that connected with the image processing system are not on the real highways. As a result, the information input is not from the real sites as well.
-    \item To test with large amount of data flow, I have to use synthesized data instead.
-    \item The information which use in OD matrix generating is not real-time data but under a delay acceptance because Hadoop analytic unit is a batch processing operation. More importantly, small value changing in the OD matrix are not highly sensitive and cause significant differences.
-\end{enumerate}
 
 \section{Research Outline}
 
