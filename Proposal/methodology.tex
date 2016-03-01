@@ -18,57 +18,65 @@ As said in introduction, deep learning algorithms will be applied to face recogn
 The database which will be used for the learning process is a set of 14 videos recorded in the MBK Shopping Center of Bangkok. The duration of the videos is variable, from a minute to around three minutes and thirty seconds. Three of the researchers of our laboratory appear on the videos, walking in the mall like any other person.
 
 \section{Raw Database of Faces}
-An algorithm will process like so:
 
-\begin{algorithm}
-\caption{Lame Algorithm}
-\label{lame-algorithm}
-\begin{algorithmic}
-  \REQUIRE $B$: set of all current blobs
-  \REQUIRE $T$: set of all current tracks
-  \REQUIRE $M$: merged track association matrix
-  \ENSURE $\widetilde{T}$: set of all revised tracks
-  \ENSURE $\widetilde{M}$: revised merged track association matrix
-  \STATE $\widetilde{T} \gets \emptyset$; $\widetilde{M} \gets \emptyset$; $L \gets \emptyset$
-%  \STATE \COMMENT{Construct an overlap area matrix between the bounding box of blobs and tracks.}
-  \STATE $A \gets \textsc{Get-Overlap-Area-Matrix}(B, T)$
-  \FORALL{$t \in T$}
-    \STATE \textbf{if} $t$ is marked as processed \textbf{then} continue
-    \STATE $B' \gets \{ b' \mid A(b', t) > 0 \}$ \COMMENT{$B'$ contains candidate blobs for track $t$.}
-    \STATE $T' \gets \{ t \} \cup \{ t' \mid M(t, t') = 1 \}$ \COMMENT{$T'$ contains all tracks currently merged with $t$.}
-    \IF{$|B'| \geq 1$}
-      \FORALL{$t' \in T'$}
-        \STATE Let $b = \displaystyle\argmax_{b' \in B'} S(b', t')$
-        \STATE $L \gets L \cup \{ (t', b) \}$
-        \STATE $\textsc{Mark-Track-As-Processed}(t')$
-      \ENDFOR
-    \ENDIF
-  \ENDFOR
-  \FORALL{$(t_i, t_j) \in T \times T$}
-    %\STATE \COMMENT{If track $t_i$ links to the same blob $b$ as track $t_j$}
-    \STATE If $\exists b$ s.t.\ $(t_i, b) \in L \wedge (t_j, b) \in L, \widetilde{M}_{ij} \gets 1$, otherwise $\widetilde{M}_{ij} \gets 0$
-  \ENDFOR
-  \STATE $T^* \gets \{ t^* \mid \neg\exists b \in B \;\text{s.t.}\; (t^*,b) \in L \}$ \COMMENT{$T^*$ contains tracks for which ``stale count'' will be increased.}
-  \STATE $\widetilde{T} \gets \textsc{Update-Or-Delete-Stale-Tracks}(T,T^*)$
-  \STATE $B^* \gets \{ b^* \mid \neg \exists t \in T \;\text{s.t.}\; (t, b^*) \in L \}$ \COMMENT{$B^*$ contains blobs with no tracks assigned.}
-  \STATE $\widetilde{T} \gets\textsc{Add-New-Tracks-For-Not-Linked-Blobs}(\widetilde{T},B^*)$
-\end{algorithmic}
+A C++ algorithm using OpenCV (Bradski, G. 2000) will process like so:
+
+\begin{algorithm}[H]
+ \For{each video in the database}{
+ \For{each frame of the current video}{
+ 	Detect all the faces of the current frame N in the current video\;\newline
+  	Save P-th detected in "Database/video/FrameNFaceP.jpg\"\;
+  }
+  }
+ \caption{Face detection Algorithm}
 \end{algorithm}
 
+The algorithm used for face detection uses a machine learning process called Haar feature-based cascade classifiers, described in (Viola, Jones, 2001).
 
+Once the process is over, a "Database" directory is created one directory for each video. In each directory, all the faces are saved as .jpg files.
 
+\begin{figure}[t]
+  \centering
+  \includegraphics[scale=0.7]{figures/face1.jpg}
+  \includegraphics[scale=0.7]{figures/face2.jpg}
+  \caption[An example of two faces extracted from the surveillance system]{An example of two faces extracted from the surveillance system}
+  \label{fig:face}
+\end{figure}
 
+\section{Creation of database files}
 
+The framework which will be presented in the next section requires basically two files to work: a train.txt file and a test.txt file. Their role is trivially linked to their name in a supervised learning process. Each of those files share the same structure:
 
-\section{Technologies deployed}
-OpenCV Caffe. Python/Matlab. Have to cite the reference articles for these frameworks.
+\blockquote{/adress/of/the/training/image1.jpg label\newline
+/adress/of/the/training/image2.jpg label2\newline
+...\newline
+/adress/of/the/training/imageN.jpg labelN}
 
-\section{Database Generation}
+The label being 1 for the first of our researchers appearing in the surveillance system, 2 for the second one, 3 for the third one, and 0 for any other person.
 
-Videos -> Image DB with openCV script in C++ -> Usable DB.
+The labelisation has to be done manually. The chosen method consists in modifying the name of the files where a researcher appears in this way:
+
+\blockquote{filename.jpg \rightarrow Kfilename.jpg
+}
+
+K being the label of the researcher.
+
+It is a feasible task to create a serie of python scripts which will run one after the other to create the required train.txt and test.txt files. These python scripts will be indirectly launched through bash scripts. A README file will be provided to explain which commands to type and which options to select to generate the required files from the database.\\
+
+The purpose of the designed architecture is to make those scripts reusable for any new database, and generalizable for an arbitrary number of labels. If a user provides an other database of videos, and follows the process described in the README file, the required train.txt and test.txt files will be generated, and the models presented in the next section will can be used for learning or testing directly on his own data.
 
 \section{Model}
 
-Two schemes are considered : siamese and direct.
+The chosen deep learning framework for this study is Caffe (Jia, Yangqing and Shelhamer, Evan and Donahue, Jeff and Karayev, Sergey and Long, Jonathan and Girshick, Ross and Guadarrama, Sergio and Darrell, Trevor, 2014). It is possible that Torch ( Collobert, Kavukcuoglu, Farabet, 2011) will be used also, to some extent.\\
 
-\FloatBarrier
+Different strategies have been considered for this modelisation. As explained in the previous chapter, there are two usual schemes for face recognition.\newline
+-The first one is the "same/not same" scheme. The idea is to readjust the Siamese Network described by (Lecun et Al, 2005) to our particular dataset. As mentioned in the article, \enquote{The method can be used for recognition or verification applications where the number of categories is very large and not known during training, and where the number of training samples for a single category is very small.}. This 
+
+\newline
+-The second scheme is direct face identification. For this purpose, the idea is to modify the last layer of a state-of-the-art range deep neural network architecture for face identification. The output of this last modified layer should be binary. Either the input image represents one of our researchers -in practice, a criminal-, or either it is not. The previous layers should already be trained, and the training should be done on the last layer only.
+
+\section{Testing}
+
+As we just said, the output of a face identification model should be binary. A python script to test the accuracy of the model can be written with no difficulty. On the contrary, the input of a Siamese Network is two images and the output is an energy. This energy is high for two images representing two different persons and low else. A threshold on this energy has to be determined to make classification possible with the network. Thus, before any test, a script has to be written, determining a good threshold. This script should be written using pycaffe, the caffe model for python. Then, and only then can the tests be done.
+
+%\FloatBarrier
