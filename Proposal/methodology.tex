@@ -3,15 +3,23 @@
 \chapter{Methodology}
 \label{ch:methodology}
 
-\textit{Some intro..}
+\section{System overview}
 
-\section{System Overview}
+\begin{figure}[t]
+  \centering
+  \includegraphics[scale=0.7]{figures/methodology.png}  
+  \caption[A general representation of ]{}
+  \label{fig:Methodology}
+\end{figure}
 
-Some text .. Algorithm \ref{lame-algorithm} is just a pseudocode.
 
-\renewcommand{\algorithmicrequire}{\textbf{Input:}}
-\renewcommand{\algorithmicensure}{\textbf{Output:}}
-\renewcommand{\algorithmicforall}{\textbf{for each}}
+\section{Database}
+As said in introduction, deep learning algorithms will be applied to face recognition in videosurveillance system. A database of surveillance videos is required to generate a training set and a testing set for our model.
+The database which will be used for the learning process is a set of 14 videos recorded in the MBK Shopping Center of Bangkok. The duration of the videos is variable, from a minute to around three minutes and thirty seconds. Three of the researchers of our laboratory appear on the videos, walking in the mall like any other person.
+
+\section{Raw Database of Faces}
+An algorithm will process like so:
+
 \begin{algorithm}
 \caption{Lame Algorithm}
 \label{lame-algorithm}
@@ -47,10 +55,20 @@ Some text .. Algorithm \ref{lame-algorithm} is just a pseudocode.
 \end{algorithmic}
 \end{algorithm}
 
-\section{System Design}
 
-\subsection{Design A}
 
-Some text ..
+
+
+
+\section{Technologies deployed}
+OpenCV Caffe. Python/Matlab. Have to cite the reference articles for these frameworks.
+
+\section{Database Generation}
+
+Videos -> Image DB with openCV script in C++ -> Usable DB.
+
+\section{Model}
+
+Two schemes are considered : siamese and direct.
 
 \FloatBarrier
