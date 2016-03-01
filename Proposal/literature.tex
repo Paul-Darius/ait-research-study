@@ -1,12 +1,12 @@
 \setlength{\footskip}{8mm}
 
 \chapter{Literature Review} 
-\label{ch:literature-review}
+\protect\label{ch:literature-review}
 
 As said in the previous section, the goal of this study is to exploit \textit{deep learning} algorithms for face recognition in surveillance videos.\\
 
 \section{About Deep Learning}
-\label{Main-keywords-of-the-topic}
+\protect\label{Main-keywords-of-the-topic}
 According to "Deep Learning Methods and Applications" by Li Deng and Dong Yu, 2014:
 
 \blockquote{Deep learning is a set of algorithms in machine
@@ -19,11 +19,11 @@ concepts can help to define many higher-level concepts.}
 
 One of the most well-known deep learning algorithms is the \textit{Convolutional Neural Network} (LeCun, Bottou, Bengio and Haffner, 1998), a variant of the Multilayer Perceptron (Principles of neurodynamics; perceptrons and the theory of brain mechanisms, Rosenblatt, 1961) which involves the use of convolutional layers (see Figure 2-1). Biologically inspired by animals visual mechanisms, it is historically known for an application called \textit{LeNet}, able to recognize hand-written digits (LeCun et al., 1989). For ten years, the interest for convolutional networks has grown fast. In fact, with the evolution of technology -basically massive usage of always more powerful GPU cards-, it has been possible to use these networks more widely and for various tasks. They have been used widely for human face classification tasks and have given impressive results.
 
-\begin{figure}[t]
+\begin{figure}[!ht]
   \centering
   \includegraphics[scale=0.4]{figures/lenet.png}  
   \caption[Architecture of LeNet-5 for digits recognition. Extracted from LeCun, Bottou, Bengio and Haffner, 1998.]{Architecture of LeNet-5 for digits recognition. Extracted from LeCun, Bottou, Bengio and Haffner, 1998.}
-  \label{fig:lenet}
+  \protect\label{fig:lenet}
 \end{figure}
 
 \section{Previous Work}
@@ -32,11 +32,11 @@ There are two main schemes for face recognition :\newline
 -Recognition by comparison. Those are the "Same/Not Same" algorithms. The basic idea is that the training dataset is made of pairs of image linked to the label "1" if they are representing the same object -in our case, the face of a person, and 0 otherwise. In deep learning, the reference algorithm is the Siamese Network (Chopra, Hadsell, LeCun, 2005). The siamese network is built out of two convolutional networks. The input of the first one is the first image of the pair and the input of the second one is the second image. The two networks share the same parameters, and return two values each. Those values are used to compute an energy. If the energy is high, the two images are considered as "very different". Else they are considered as similar. This energy is a variable of a loss function which will be the origin of an update on the parameters of the two convolutional networks by contrastive gradient descent (Figure 2-2). Intuitively, this computed energy is similar to the gravitational potential energy. If a mass is far from Earth, its GPE will be high, and the mass will be considered as not belonging to the planet. If the mass is stuck to Earth, its GPE will be low and the mass will be considered as a part of the planet itself.
 
 
-\begin{figure}[t]
+\begin{figure}[!ht]
   \centering
   \includegraphics[scale=0.4]{figures/siamese.png}  
   \caption[Architecture of a siamese network. Extracted from Chopra, Hadsell, LeCun, 2005.]{Architecture of a siamese network. Extracted from Chopra, Hadsell, LeCun, 2005.}
-  \label{fig:Siamese}
+  \protect\label{fig:Siamese}
 \end{figure}
 
 -Recognition by person identification. A network takes an image as an input and returns a label which identifies one and only one person as an output. The literature on this type of architectures is extremely abundant. On face verification, DeepFace (2014) reached a 97.35\% accuracy on the Labeled Faces in the Wild (LFW). The state of the art for face identification is FaceNet (Schroff, Kalenichenko, Philbin, 2015).

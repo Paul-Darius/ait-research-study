@@ -10,13 +10,11 @@
 \usepackage[autostyle]{csquotes}  
 \usepackage{latexsym}
 \usepackage{amssymb,amsthm,amsmath}
-\usepackage[notocbib]{apacite}
+%\usepackage[notocbib]{apacite}
 \usepackage{verbatim}
 \usepackage{multirow}
 \usepackage{bm}
 \usepackage{url}
-\usepackage{algorithm}
-%\usepackage{algorithmic}
 \usepackage[]{algorithm2e}
 \usepackage{algcompatible}
 \usepackage{placeins}
@@ -58,6 +56,9 @@
 \setlength{\headheight}{12pt}
 \pagestyle{plain}
 
+TEXT \cite{1}
+
+
 \include{intro}
 \include{literature}
 \include{methodology}
@@ -65,9 +66,8 @@
 %\include{conclusion}
 
 % NEED TO CHANGE THE SECTION NUMBER FOR REFERENCES ACCORDINGLY.
-\addcontentsline{toc}{chapter}{4 \hskip 3.55em References}
-
-\bibliographystyle{apacite}
+%\addcontentsline{toc}{chapter}{4 \hskip 3.55em References}
+\bibliographystyle{plain}
 \bibliography{references}
 
 % COMMENT THE LINES ABOUT APPENDICS OUT IF YOU DO NOT HAVE THIS SECTION.
@@ -77,11 +77,11 @@
 %                            APPENDICES                           %
 %                                                                 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage\pagestyle{plain}
-\theappendix
+%\newpage\pagestyle{plain}
+%\theappendix
 
 % NEED TO CHANGE THE SECTION NUMBER FOR REFERENCES ACCORDINGLY.
-\addcontentsline{toc}{chapter}{7 \hskip 3.55em Appendices}
+%\addcontentsline{toc}{chapter}{7 \hskip 3.55em Appendices}
 
 %\include{appendix1}
 

@@ -5,10 +5,10 @@
 
 \section{System overview}
 
-\begin{figure}[t]
+\begin{figure}[!ht]
   \centering
   \includegraphics[scale=0.7]{figures/methodology.png}  
-  \caption[A general representation of ]{}
+  \caption[An overview of the global design of the study.]{An overview of the global design of the study.}
   \label{fig:Methodology}
 \end{figure}
 
@@ -21,21 +21,21 @@ The database which will be used for the learning process is a set of 14 videos r
 
 A C++ algorithm using OpenCV (Bradski, G. 2000) will process like so:
 
-\begin{algorithm}[H]
- \For{each video in the database}{
- \For{each frame of the current video}{
- 	Detect all the faces of the current frame N in the current video\;\newline
-  	Save P-th detected in "Database/video/FrameNFaceP.jpg\"\;
-  }
-  }
- \caption{Face detection Algorithm}
-\end{algorithm}
+%\begin{algorithm}[H]
+ %\For{each video in the database}{
+ %\For{each frame of the current video}{
+ %	Detect all the faces of the current frame N in the current video\;
+ % 	Save P-th detected in "Database/video/FrameNFaceP.jpg\"\;
+  %}
+  %}
+ %\caption{Face detection Algorithm}
+%\end{algorithm}
 
 The algorithm used for face detection uses a machine learning process called Haar feature-based cascade classifiers, described in (Viola, Jones, 2001).
 
-Once the process is over, a "Database" directory is created one directory for each video. In each directory, all the faces are saved as .jpg files.
+Once the process is over, a \enquote{Database} directory is created one directory for each video. In each directory, all the faces are saved as .jpg files.
 
-\begin{figure}[t]
+\begin{figure}[!ht]
   \centering
   \includegraphics[scale=0.7]{figures/face1.jpg}
   \includegraphics[scale=0.7]{figures/face2.jpg}
@@ -56,8 +56,7 @@ The label being 1 for the first of our researchers appearing in the surveillance
 
 The labelisation has to be done manually. The chosen method consists in modifying the name of the files where a researcher appears in this way:
 
-\blockquote{filename.jpg \rightarrow Kfilename.jpg
-}
+\blockquote{filename.jpg becomes Kfilename.jpg}
 
 K being the label of the researcher.
 
@@ -70,9 +69,7 @@ The purpose of the designed architecture is to make those scripts reusable for a
 The chosen deep learning framework for this study is Caffe (Jia, Yangqing and Shelhamer, Evan and Donahue, Jeff and Karayev, Sergey and Long, Jonathan and Girshick, Ross and Guadarrama, Sergio and Darrell, Trevor, 2014). It is possible that Torch ( Collobert, Kavukcuoglu, Farabet, 2011) will be used also, to some extent.\\
 
 Different strategies have been considered for this modelisation. As explained in the previous chapter, there are two usual schemes for face recognition.\newline
--The first one is the "same/not same" scheme. The idea is to readjust the Siamese Network described by (Lecun et Al, 2005) to our particular dataset. As mentioned in the article, \enquote{The method can be used for recognition or verification applications where the number of categories is very large and not known during training, and where the number of training samples for a single category is very small.}. This 
-
-\newline
+-The first one is the \enquote{same/not same} scheme. The idea is to readjust the Siamese Network described by (Lecun et Al, 2005) to our particular dataset.\newline
 -The second scheme is direct face identification. For this purpose, the idea is to modify the last layer of a state-of-the-art range deep neural network architecture for face identification. The output of this last modified layer should be binary. Either the input image represents one of our researchers -in practice, a criminal-, or either it is not. The previous layers should already be trained, and the training should be done on the last layer only.
 
 \section{Testing}
