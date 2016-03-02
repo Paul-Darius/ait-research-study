@@ -14,22 +14,22 @@
 
 
 \section{Database}
-As said in introduction, deep learning algorithms will be applied to face recognition in videosurveillance system. A database of surveillance videos is required to generate a training set and a testing set for our model.
+As said in introduction, deep learning algorithms will be applied to face recognition in video surveillance system. A database of surveillance videos is required to generate a training set and a testing set for our model.
 The database which will be used for the learning process is a set of 14 videos recorded in the MBK Shopping Center of Bangkok. The duration of the videos is variable, from a minute to around three minutes and thirty seconds. Three of the researchers of our laboratory appear on the videos, walking in the mall like any other person.
 
 \section{Raw Database of Faces}
 
 A C++ algorithm using OpenCV (Bradski, G. 2000) will process like so:
 
-%\begin{algorithm}[H]
- %\For{each video in the database}{
- %\For{each frame of the current video}{
- %	Detect all the faces of the current frame N in the current video\;
- % 	Save P-th detected in "Database/video/FrameNFaceP.jpg\"\;
-  %}
-  %}
- %\caption{Face detection Algorithm}
-%\end{algorithm}
+\begin{algorithm}[H]
+ \For{each video in the database}{
+ \For{each frame of the current video}{
+ 	Detect all the faces of the current frame N in the current video\;
+  	Save P-th detected in "Database/video/FrameNFaceP.jpg\"\;
+  }
+  }
+ \caption{Face detection Algorithm}
+\end{algorithm}
 
 The algorithm used for face detection uses a machine learning process called Haar feature-based cascade classifiers, described in (Viola, Jones, 2001).
 
@@ -66,14 +66,34 @@ The purpose of the designed architecture is to make those scripts reusable for a
 
 \section{Model}
 
-The chosen deep learning framework for this study is Caffe (Jia, Yangqing and Shelhamer, Evan and Donahue, Jeff and Karayev, Sergey and Long, Jonathan and Girshick, Ross and Guadarrama, Sergio and Darrell, Trevor, 2014). It is possible that Torch ( Collobert, Kavukcuoglu, Farabet, 2011) will be used also, to some extent.\\
+\subsection{Framework}
+The chosen deep learning framework for this study is Caffe (Jia et al., 2014). It is possible that Torch (Collobert, Kavukcuoglu, Farabet, 2011) will be used also, to some extent.\\
 
+\subsection{Strategy}
 Different strategies have been considered for this modelisation. As explained in the previous chapter, there are two usual schemes for face recognition.\newline
--The first one is the \enquote{same/not same} scheme. The idea is to readjust the Siamese Network described by (Lecun et Al, 2005) to our particular dataset.\newline
+-The first one is the \enquote{same/not same} scheme. The idea is to readjust the Siamese Network described by (Lecun et al., 2005) to our particular dataset.\newline
 -The second scheme is direct face identification. For this purpose, the idea is to modify the last layer of a state-of-the-art range deep neural network architecture for face identification. The output of this last modified layer should be binary. Either the input image represents one of our researchers -in practice, a criminal-, or either it is not. The previous layers should already be trained, and the training should be done on the last layer only.
+
+\subsection{The learning process with Caffe}
+
+The Caffe framework requires several files to learn the model.\\
+-First, a train.txt and a test.txt files which give the path to all the images with their corresponding label.\newline
+-Second, a train\_test.prototxt file which describes the architecture of the network. This file is written with protobuf. According to the README file available on the project's GitHub, \backquote{Protocol Buffers (a.k.a., protobuf) are Google's language-neutral, platform-neutral, extensible mechanism for serializing structured data.}. The figure \ref{fig:logreg} shows how a logistic regression classifier is easily defined in a train\_test.prototxt file with Caffe.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[scale=0.7]{figures/logreg.jpg}
+  \includegraphics[scale=0.4]{figures/logregfile.png}
+  \caption[Logistic regression classifier definition with Caffe. Extracted from the official website of the framework.]{Logistic regression classifier definition with Caffe. Extracted from the official website of the framework.}
+  \label{fig:logreg}
+\end{figure}
+
+\FloatBarrier
+
+-Third, a solver.prototxt file which contains informations on the batch size or on the variables related to the used loss function.
+
+The learning process produces two files. A .caffemodel and a .solverstate. Those files are used to store the value of the parameters of the designed model after a number of steps of learning chosen in the .solverstate file.
 
 \section{Testing}
 
 As we just said, the output of a face identification model should be binary. A python script to test the accuracy of the model can be written with no difficulty. On the contrary, the input of a Siamese Network is two images and the output is an energy. This energy is high for two images representing two different persons and low else. A threshold on this energy has to be determined to make classification possible with the network. Thus, before any test, a script has to be written, determining a good threshold. This script should be written using pycaffe, the caffe model for python. Then, and only then can the tests be done.
-
-%\FloatBarrier

@@ -5,9 +5,9 @@
 \section{Background}
 
 
-Cameras are everywhere. In front of any store, any business. In any streets. They are used for several purposes :\newline
--After a crime has been commited as clues or proofs. The goal is to get more informations on the person or on the events which happened.\newline
--In the next minutes after a crime, to intercept the person who commited it. Some teams in the police are always scanning surveillance videos in the subways, looking for a pickpocket, and stopping them in the corridors, before they could escape the station.\newline
+Cameras are everywhere, in front of any store, any business and any streets. They are used for several purposes :\newline
+-After a crime has been commited as clues or proofs. The goal is to get more information on the person or on the events happened.\newline
+-In the next minutes after a crime, to intercept the person who committed it. Some teams in the police are always scanning surveillance videos, monitoring the subways, streets etc to be able to catch the perpettrator in the corridors, before they could escape the station.\newline
 -Before a crime. Typically, to dissuade potential thieves from stealing anything. Sometimes, the cameras used are not working, not recording, or pure fakes.\\
 
 In the context of global terrorism, the problem of recognizing a previously identified terrorist, hoping to follow him on video cameras saddly appears to be a key issue. More generally, following the path of any criminal using surveillance videos sounds like a main concern.\\
@@ -17,23 +17,23 @@ In this work we can easily assume that the police faces several difficulties:\ne
 -The second one is the low quality of the videos. It is sometimes very hard to recognize a person on a video with a low resolution.\newline
 -The third one is the crowd. It takes a second to recognize a previously identified thief on a video where he is alone. What if there are thirty other persons on the video, in a crowded street for example? \\
 
-These issues leads to a simple conclusion. Recognizing a previously identified criminals requires a lot of human resources. It is an expensive work, which is unfortunately more and more important.\\
+Recognizing a previously identified criminals on these video surveillance cameras adds on to the above mentioned difficulties which requires a lot of human resources. These issues lead to a simple conclusion.  It is an expensive work in terms of time, money and human resources, nevertheless extermely important to upheld the national security of any country.\\
 
-Automatizing the face recognition process in surveillance video seems to be an interesting answer to that problem.\\
+Automatizing the face recognition process in surveillance video seems to be an interesting answer to address the problem.\\
 
 
 \section{Problem Statement}
 
- Face identification is a current main machine learning issue. The best results were obtained using deep neural network -any artificial neural network with more than one hidden layer. In 2014, DeepFace reached an accuracy of 97.35\% for face verification (Taigman, Yang, Ranzato, Wolf, 2014). In 2015, FaceNet reached a 99.63\% accuracy on the \enquote{Labeled Faces in the Wild} database for identification.\\
+ Face identification is a key machine learning issue at present. The best results were obtained using deep neural network -any artificial neural network with more than one hidden layer. In 2014, DeepFace reached an accuracy of 97.35\% for face verification (Taigman, Yang, Ranzato, Wolf, 2014). In 2015, FaceNet reached a 99.63\% accuracy on the \enquote{Labeled Faces in the Wild} database for identification (Schroff, Kalenichenko, Philbin, 2015).\\
 
 
-In surveillance video, face recognition faces in particular blurriness, low resolution and unexpected poses on faces. Though the problem of face recognition in surveillance video has already been studied, deep learning techniques may have a lot more to say on this issue.\\
+In surveillance video, face recognition faces issues such as blurriness, low resolution and unexpected poses of faces. Though the problem of face recognition in surveillance video has already been studied, deep learning techniques have a lot more to add on this issue.\\
 
 The goal of this research is to build a deep neural network for face recognition on surveillance videos. This model should be based on the latest algorithms deep learning offers.
 
 \section{Objectives}
 
-A database is provided for this study. It contains recorded videos from a surveillance system of the MBK mall in Bangkok. The figure 1 shows a frame of one of these videos. Three of our researchers appear during several seconds on some of the videos. They are walking like anyone else in the mall.\\
+The objectives of this research are formed on a database already provided for this study. This database contains recorded videos from a surveillance system of the MBK mall in Bangkok. The figure 1 shows a frame of one of these videos. Three of our researchers appear during several seconds on some of the videos. They are walking like anyone else in the mall.\\
 
 \begin{figure}[t]
   \centering
@@ -42,7 +42,7 @@ A database is provided for this study. It contains recorded videos from a survei
   \label{fig:example}
 \end{figure}
 
-Chosing this database serves one goal: to be placed in the theoretical situation of policemen looking for one or several criminals in the streets or in the corridors of public places, using few sample pictures of them to try to find them out.\\
+Choosing this database serves one goal: to be placed in the theoretical situation of policemen looking for one or several criminals in the streets or in the corridors of public places, using few sample pictures of them to try to find them out.\\
 
 Our researchers are playing the role of the criminals we are looking for.
 The main objective is to use deep learning techniques to build an automated solution to this task of finding our researchers in the MBK mall.\\
@@ -55,7 +55,7 @@ More precisely, considering this database, there are three main objectives in th
 \section{Limitations and Scope}
 
 There are two main limitations to this research:\\
--Time. This project is three months long. Many deep learning techniques are considered. Unhappily, not all of the interesting ones will can be explored.\newline
+-Time. This project is three months long. There are many deep learning techniques existing however, due to the limits of time unfortunately, not all could be explored.\newline
 -Material limitations. The laboratory provides an NVIDIA GeForce 780 GTX GPU card for the computation. This implies some limitations on the mini-batch size for stochastic gradient descent. Preliminary results show that the size will be limited to 20 samples, while the usual size is 128.\newline
 
 Deep learning gives astonishing results in the task of face recognition. That is why despite those limitations, we can get an interesting model in the context of surveillance videos.  
@@ -73,4 +73,3 @@ In Chapter \ref{ch:methodology}, I propose my methodology.
 %Finally, in Chapter \ref{ch:conclusion}, I conclude my thesis.
 
 \FloatBarrier
-
