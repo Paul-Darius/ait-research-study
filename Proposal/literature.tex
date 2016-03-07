@@ -26,15 +26,66 @@ One of the most well-known deep learning algorithms is the \textit{Convolutional
   \protect\label{fig:lenet}
 \end{figure}
 
-\section{About Neural Networks}
-\subsection{Backpropagation}
-\subsection{Convolutional layer}
+\section{About Convolutional Neural Networks}
+
+A convolutional neural network is generally made of one or more convolutional layers followed by a standard neural network.
+Convolutional layers are similar to standard layers. The difference is that in this specific case, we connect only adjacent neurons of a layer to the next one. On the contrary, standard layers connect all the neurons of a layer to the next one. Then, most frequently a subsampling of the convolutional layer is applied and the output of this step is used as an input for next layer.\\
+
+The next figures show a typical convolutional neural network represented in 3 dimensions. Its role is to identify a hand-written digit in an image as written number. This 3D representation has been made by Harley, in 2015.\\
+
+Figure 2.2 shows the full network. The bottom layer is the input. A hand-written \enquote{2} digit.
+
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[scale=0.5]{figures/conv1.png}  
+  \caption[3-dimensional representation of a typical convolutional neural network.]{3-dimensional representation of a typical convolutional neural network.}
+  \protect\label{fig:conv1}
+\end{figure}
+\FloatBarrier
+
+The next layer is the first convolutional one. See Figure 2.3. Some restricted sub-regions of the input are received by the neurons of the next layer. This idea is biologically inspired by cells from the visual cortex of animals, which are sensitive to fixed small regions of the visual field. 
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[scale=0.6]{figures/conv2.png}  
+  \caption[The first convolutional layer.]{The first convolutional layer.}
+  \protect\label{fig:conv2}
+\end{figure}
+\FloatBarrier
+In the next layer of the convolutional network, a subsampling occurs. See Figure 2.4. 
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[scale=1.0]{figures/conv3.png}  
+  \caption[The first subsampling.]{The first subsampling.}
+  \protect\label{fig:conv3}
+\end{figure}
+\FloatBarrier
+The Figure 2.5 represents the second convolutional layer.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[scale=0.4]{figures/conv4.png}  
+  \caption[The second convolutional layer.]{The second convolutional layer.}
+  \protect\label{fig:conv4}
+\end{figure}
+\FloatBarrier
+The two last layers before the final output represent standard fully-connected layers. See Figure 2.6.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[scale=0.7]{figures/conv5.png}  
+  \caption[The fully-connected layers.]{The fully-connected layers.}
+  \protect\label{fig:conv5}
+\end{figure}
+\FloatBarrier
 
 \section{Previous Work}
 \subsection{Deep Learning for face Recognition}
 There are two main schemes for face recognition:
 \begin{itemize}
-\item Recognition by comparison. The \enquote{Same/Not Same} algorithms. The basic idea is that the training dataset is made of pair of images linked to the label \enquote{1} if they represent the same object --- in our case, the face of a person, and \enquote{0} otherwise. In deep learning, the standard same/not same network is called the \enquote{Siamese Network} (Chopra, Hadsell, LeCun, 2005). A Siamese network is built out of two convolutional networks. The input to the first is the first image of the pair and the input to the second is the second image. The two networks share the same parameters and return two values each. Those values are used to compute an energy. If the energy is high, the two images are considered to be \enquote{very different}. Otherwise they are considered to be \enquote{similar}. The energy is a function of a loss function used to update the parameters of the two convolutional networks by contrastive gradient descent (Figure 2.2). Intuitively, the computed energy is similar to gravitational potential energy. If a mass is far from Earth, its GPE is high, and the mass will be considered as not belonging to the planet. If the mass is stuck to the Earth, its GPE will be low, and the mass is considered part of the planet itself.
+\item Recognition by comparison. The \enquote{Same/Not Same} algorithms. The basic idea is that the training dataset is made of pair of images linked to the label \enquote{1} if they represent the same object --- in our case, the face of a person, and \enquote{0} otherwise. In deep learning, the standard same/not same network is called the \enquote{Siamese Network} (Chopra, Hadsell, LeCun, 2005). A Siamese network is built out of two convolutional networks. The input to the first is the first image of the pair and the input to the second is the second image. The two networks share the same parameters and return two values each. Those values are used to compute an energy. If the energy is high, the two images are considered to be \enquote{very different}. Otherwise they are considered to be \enquote{similar}. The energy is a function of a loss function used to update the parameters of the two convolutional networks by contrastive gradient descent (Figure \ref{fig:Siamese}). Intuitively, the computed energy is similar to gravitational potential energy. If a mass is far from Earth, its GPE is high, and the mass will be considered as not belonging to the planet. If the mass is stuck to the Earth, its GPE will be low, and the mass is considered part of the planet itself.
 
 
 \begin{figure}[!ht]
