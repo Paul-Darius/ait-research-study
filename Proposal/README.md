@@ -8,3 +8,8 @@ It is based on a template given by AIT. To compile this file, just run:
 ```
 rubber -d thesis.tex
 ```
+
+The original template is available on GitHub:
+```
+https://github.com/aitcsim/ait-thesis-latex-template.git
+```
