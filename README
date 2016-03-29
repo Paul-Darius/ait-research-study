@@ -48,6 +48,3 @@ The goal is to resize the images of the database. Modify the path “Database/*/
 The Database directory contains the database of faces sorted by the video.
 
 Creator/Contributor : Paul-Darius Sarmadi <sarmadipauldarius@gmail.com> 2016
-
-N.B.: 
-1) This project is going to evolve A LOT. What is in there at the moment (7th february 2016) has probably NO LINK with what it should be in April/May.

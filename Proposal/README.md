@@ -3,8 +3,8 @@
 Folder
 ------
 
-This folder contains the files required to produce the research study proposal file (pdf), given in the main directory.
-It is based on a template given by AIT. To compile this file, just run:
+This folder contains the files required to produce the research study proposal file (proposal.pdf), given in the main directory.
+This work is based on a template given by AIT. To compile, just run:
 ```
 rubber -d thesis.tex
 ```
