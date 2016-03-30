@@ -89,8 +89,7 @@ int main(int argc, char* argv[])
     while(1)
     {
         current_frame = cap.get(CV_CAP_PROP_POS_FRAMES);
-        //cout << (float)current_frame/(float)total_number_of_frames*100 << "%" << endl;
-        cout << "----------" << endl;
+        cout << (float)current_frame/(float)total_number_of_frames*100 << "%" << endl;
         cap >> frame; // get a new frame from the video
         if(frame.empty())
         {
@@ -138,10 +137,8 @@ Mat detectAndDisplay( Mat frame, string window_name, int frame_number, string vi
     // For each face of the current frame
     for( int i = 0; i < faces_size; i++ )
     {
-        cout << "***" << endl;
         happened = false;
         distance=abs(frame.size().height)+abs(frame.size().width);
-        cout << distance << endl;
         k_best=0;
         l_best=0;
         Rect_ROI = Mat(frame,faces[i]);
@@ -157,36 +154,17 @@ Mat detectAndDisplay( Mat frame, string window_name, int frame_number, string vi
             {
                 if (k==array_of_faces.size()-1 && l==i)
                 {
-                    cout << "Stop here" << endl;
                     break;
                 }
-                if( (abs(faces[i].x - array_of_faces[k][l].x) < sqrt(2)*Rect_ROI.rows && abs(faces[i].y - array_of_faces[k][l].y) < Rect_ROI.rows))
-                   /*Previously I used: (Rect_ROI.rows > 100 && abs(faces[i].x - array_of_faces[k][l].x) < frame.size().width / 10 &&
-                    abs(faces[i].y - array_of_faces[k][l].y) < frame.size().height / 10)
-                   )*/
+                if( (abs(faces[i].x - array_of_faces[k][l].x) < Rect_ROI.rows && abs(faces[i].y - array_of_faces[k][l].y) < Rect_ROI.rows))
                 {
                     happened = true;
-                    cout << faces[i].x << ", " << faces[i].y <<endl;
-                    cout << "Potential match with label "<< array_of_faces_labeling[k][l] << endl;
-                    cout << "distance: " << (abs(faces[i].x - array_of_faces[k][l].x)+abs(faces[i].y - array_of_faces[k][l].y)) << endl;
-                    cout << "Trucs:" <<endl;
-                    cout << faces[i].x << endl;
-                    cout << array_of_faces[k][l].x << endl;
-                    cout << faces[i].y << endl;
-                    cout << array_of_faces[k][l].y << endl;
-                    cout << "Fin de trucs" << endl;
-                    
                     
                     if ( (abs(faces[i].x - array_of_faces[k][l].x)+abs(faces[i].y - array_of_faces[k][l].y))<=distance )
                     {
-                        cout << faces[i].x << ", " << faces[i].y <<endl;
-                        cout << array_of_faces[k][l].x << ", " << array_of_faces[k][l].y << endl;
-
                         distance = abs(faces[i].x - array_of_faces[k][l].x)+abs(faces[i].y - array_of_faces[k][l].y);
-                        cout << "min distance update: " << distance << endl;
                         k_best = k;
                         l_best = l;
-                        cout << "Potential match with label "<< array_of_faces_labeling[k][l] << endl;
                     }
                 }
             }
@@ -194,15 +172,12 @@ Mat detectAndDisplay( Mat frame, string window_name, int frame_number, string vi
         // If at least one candidate for corresponding face was found, we choose the label of the best one
         if (happened==true)
         {
-            cout << happened << endl;
             label = array_of_faces_labeling[k_best][l_best];
             array_of_faces_labeling[frame_number][i] = label;
-            cout << "Label: " << array_of_faces_labeling[frame_number][i] << endl;
             if (i<faces_size)
                 filename = "Database/"+video_string+"/"+"Label"+NumberToString(label)+"Frame"+NumberToString(frame_number)+"Face"+NumberToString(i)+".jpg";
             else
                 filename = "Database/"+video_string+"/"+"Label"+NumberToString(label)+"|Profile|Frame"+NumberToString(frame_number)+"Face"+NumberToString(i)+".jpg";
-            cout << "Label"+NumberToString(label)+"Frame"+NumberToString(frame_number)+"Face"+NumberToString(i)+".jpg" << endl;
             imwrite(filename,Rect_ROI);
             if (demo_mode)
                 rectangle(frame, faces[i],Scalar( 255, 0, 255 ),3,8,0);
@@ -210,17 +185,13 @@ Mat detectAndDisplay( Mat frame, string window_name, int frame_number, string vi
         // If there is no corresponding face, then it is a new face and we create a new label
         else
         {
-            cout <<happened << endl;
-            cout << "NEW LABEL" << endl;
             current_label++;
             label = current_label;
             array_of_faces_labeling[frame_number][i] = label;
-            cout << "Label: " << array_of_faces_labeling[frame_number][i] << endl;
             if (i<faces_size)
                 filename = "Database/"+video_string+"/"+"Label"+NumberToString(label)+"Frame"+NumberToString(frame_number)+"Face"+NumberToString(i)+".jpg";
             else
                 filename = "Database/"+video_string+"/"+"Label"+NumberToString(label)+"|Profile|Frame"+NumberToString(frame_number)+"Face"+NumberToString(i)+".jpg";
-            cout << "Label"+NumberToString(label)+"Frame"+NumberToString(frame_number)+"Face"+NumberToString(i)+".jpg" << endl;
             imwrite(filename,Rect_ROI);
             if (demo_mode)
                 rectangle(frame, faces[i],Scalar( 255, 0, 255 ),3,8,0);
@@ -228,21 +199,6 @@ Mat detectAndDisplay( Mat frame, string window_name, int frame_number, string vi
         
         
     }
-    /*
-     else if (frame_number==0)
-     {
-     label = current_label;
-     array_of_faces_labeling[frame_number][i] = label;
-     if (i<faces_size)
-     filename = "Database/"+video_string+"/"+"Frame"+NumberToString(frame_number)+"Face"+NumberToString(i)+"Label"+NumberToString(label)+".jpg";
-     else
-     filename = "Database/"+video_string+"/"+"|Profile|Frame"+NumberToString(frame_number)+"Face"+NumberToString(i)+"Label"+NumberToString(label)+".jpg";
-     imwrite(filename,Rect_ROI);
-     if (demo_mode)
-     rectangle(frame, faces[i],Scalar( 255, 0, 255 ),3,8,0);
-     current_label++;
-     }
-     */
 //-- Show what you got
 if (demo_mode)
     imshow( window_name, frame );
