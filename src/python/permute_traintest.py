@@ -5,8 +5,8 @@ import shutil
 
 number_of_input_per_label = dict() # is a dictionnary
 
-lines1 = open('Database/Caffe_Files/train1.txt','r')
-lines2 = open('Database/Caffe_Files/train2.txt','r')
+lines1 = open('Caffe_Files/train1.txt','r')
+lines2 = open('Caffe_Files/train2.txt','r')
 
 concat = open('/tmp/concat', 'w+')
 
@@ -28,8 +28,8 @@ lines1.close()
 lines2.close()
 
 concat2 = open('/tmp/concat2', 'r')
-flines1= open('Database/Caffe_Files/train1.txt', 'w+')
-flines2= open('Database/Caffe_Files/train2.txt', 'w+')
+flines1= open('Caffe_Files/train1.txt', 'w+')
+flines2= open('Caffe_Files/train2.txt', 'w+')
 
 while 1:
 	txt = concat2.readline()

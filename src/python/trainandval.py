@@ -5,7 +5,7 @@ import shutil
 
 number_of_input_per_label = dict() # is a dictionnary
 
-full_db = open("Database/Caffe_Files/full_database.txt", "r")
+full_db = open("Caffe_Files/full_database.txt", "r")
 
 while 1:
 	txt = full_db.readline()
@@ -22,19 +22,19 @@ full_db.close()
 
 # Random permutation of the lines of the file.
 
-with open("Database/Caffe_Files/full_database.txt", "r") as source:
+with open("Caffe_Files/full_database.txt", "r") as source:
     data = [ (random.random(), line) for line in source ]
 data.sort()
-with open('Database/Caffe_Files/full_database_tmpcpy.txt','w+') as target:
+with open('Caffe_Files/full_database_tmpcpy.txt','w+') as target:
     for _, line in data:
         target.write( line )
 # Now we can generate train.txt, valid.txt and test.txt using the permutated full database.
 
 if (len(sys.argv)==1 or (len(sys.argv)==2 and sys.argv[1]=="3")):
-	full_db_permutated = open("Database/Caffe_Files/full_database_tmpcpy.txt", "r")
-	train = open('Database/Caffe_Files/train.txt','w+')
-	valid = open('Database/Caffe_Files/valid.txt','w+') 
-	test = open('Database/Caffe_Files/test.txt','w+') 
+	full_db_permutated = open("Caffe_Files/full_database_tmpcpy.txt", "r")
+	train = open('Caffe_Files/train.txt','w+')
+	valid = open('Caffe_Files/valid.txt','w+')
+	test = open('Caffe_Files/test.txt','w+')
 
 	train_label_number = dict() # is a dictionnary
 	valid_label_number = dict() # is a dictionnary
@@ -70,14 +70,14 @@ if (len(sys.argv)==1 or (len(sys.argv)==2 and sys.argv[1]=="3")):
 			train.write(txt)
 	
 	full_db_permutated.close()
-	os.remove('Database/Caffe_Files/full_database_tmpcpy.txt')
+	os.remove('Caffe_Files/full_database_tmpcpy.txt')
 	train.close()
 	valid.close()
 	test.close()
 elif (len(sys.argv)==2 and sys.argv[1]=="2"): # Second scenario: the argument is 2 ie two files created.
-	full_db_permutated = open("Database/Caffe_Files/full_database_tmpcpy.txt", "r")
-	train = open('Database/Caffe_Files/train.txt','w+')
-	test = open('Database/Caffe_Files/test.txt','w+') 
+	full_db_permutated = open("Caffe_Files/full_database_tmpcpy.txt", "r")
+	train = open('Caffe_Files/train.txt','w+')
+	test = open('Caffe_Files/test.txt','w+')
 
 	train_label_number = dict() # is a dictionnary
 	test_label_number = dict() # is a dictionnary
@@ -102,16 +102,16 @@ elif (len(sys.argv)==2 and sys.argv[1]=="2"): # Second scenario: the argument is
 			train_label_number[key] = 1
 			train.write(txt)
 	full_db_permutated.close()
-	os.remove('Database/Caffe_Files/full_database_tmpcpy.txt')
+	os.remove('Caffe_Files/full_database_tmpcpy.txt')
 
 	train.close()
 	test.close()
 elif (len(sys.argv)==2 and sys.argv[1]=="1"):
-	full_db_permutated = open("Database/Caffe_Files/full_database_tmpcpy.txt", "r")
-	train = open('Database/Caffe_Files/train.txt','w+')
+	full_db_permutated = open("Caffe_Files/full_database_tmpcpy.txt", "r")
+	train = open('Caffe_Files/train.txt','w+')
 	shutil.copyfileobj(full_db_permutated, train)
 	full_db_permutated.close()
-	os.remove('Database/Caffe_Files/full_database_tmpcpy.txt')
+	os.remove('Caffe_Files/full_database_tmpcpy.txt')
 	train.close()
 
 else:

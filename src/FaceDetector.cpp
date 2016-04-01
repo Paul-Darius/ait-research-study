@@ -177,7 +177,7 @@ Mat detectAndDisplay( Mat frame, string window_name, int frame_number, string vi
             if (i<faces_size)
                 filename = "Database/"+video_string+"/"+"Label"+NumberToString(label)+"Frame"+NumberToString(frame_number)+"Face"+NumberToString(i)+".jpg";
             else
-                filename = "Database/"+video_string+"/"+"Label"+NumberToString(label)+"|Profile|Frame"+NumberToString(frame_number)+"Face"+NumberToString(i)+".jpg";
+                filename = "Database/"+video_string+"/"+"Label"+NumberToString(label)+"Frame"+NumberToString(frame_number)+"Face"+NumberToString(i)+"|Profile|.jpg";
             imwrite(filename,Rect_ROI);
             if (demo_mode)
                 rectangle(frame, faces[i],Scalar( 255, 0, 255 ),3,8,0);
@@ -191,7 +191,7 @@ Mat detectAndDisplay( Mat frame, string window_name, int frame_number, string vi
             if (i<faces_size)
                 filename = "Database/"+video_string+"/"+"Label"+NumberToString(label)+"Frame"+NumberToString(frame_number)+"Face"+NumberToString(i)+".jpg";
             else
-                filename = "Database/"+video_string+"/"+"Label"+NumberToString(label)+"|Profile|Frame"+NumberToString(frame_number)+"Face"+NumberToString(i)+".jpg";
+                filename = "Database/"+video_string+"/"+"Label"+NumberToString(label)+"Frame"+NumberToString(frame_number)+"Face"+NumberToString(i)+"|Profile|.jpg";
             imwrite(filename,Rect_ROI);
             if (demo_mode)
                 rectangle(frame, faces[i],Scalar( 255, 0, 255 ),3,8,0);
