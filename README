@@ -45,7 +45,7 @@ FOR SIAMESE NETWORK ONLY:
 
 Supposing that the automatic labeling was not efficient enough for your particular case -typically if some main faces appeared on several videos-, you may have to manually change the labels of the concerned images.
 
-Let’s assume you have to modify few labels to face this kind of issues. If you manually changed the name of some images so that the label of each file is the first  character of the file name (ie for example 1Frame2.jpg has label 1 and 4Frame23.jpg has label 4), then, the next commands will generate a new database file called labelised_full_database.txt in the directory Caffe_File with the required labels. Note that it works only with labels between 0 to 9. With a minor modification, more labels can be modified.
+Let’s assume you have to modify few labels to face this kind of issues. If you manually changed the name of some images so that the label of each file is the first  character of the file name (ie for example 1Frame2.jpg has label 1 and 4Frame23.jpg has label 4), then, the next commands will generate a new database file called labelised_full_database.txt in the directory Caffe_File with the required labels. Note that it works only with labels between 1 to 9. With a minor modification, more labels can be modified. Other few pictures with labels 1 to 9 can be manually modified directly in the file if needed.
 
 First, let’s regenerate full_database.py with the new names:
 -> python src/python/fulldbfile.py
@@ -68,7 +68,7 @@ Generate Train and Validate caffe files : chmod +x trainandval.sh;  ./trainandva
 FOR SIAMESE NETWORK ONLY:
 —————————————————————————
 Files generation from train.txt and test.txt. For this usage, you should have done “./trainandval.sh 2” previously.
--> python /src/python/create_siamese_db.py : It will create the train1.txt, train2.txt, test1.txt and test2.txt files required by the siamese network.
+-> python src/python/create_siamese_db.py : It will create the train1.txt, train2.txt, test1.txt and test2.txt files required by the siamese network.
 
 -> Then :
 for name in Database/*/*.jpg; do

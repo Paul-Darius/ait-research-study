@@ -5,14 +5,16 @@ first_level_in_database = []
 second_level = []
 k=0
 
+# Name of the directories in the array named first_level_in_database
 for (dirpath, dirnames, filenames) in os.walk("Database"):
     first_level_in_database.extend(dirnames)
     break
 
+# Name of the file in each directory
 for i in range(0,len(first_level_in_database)):
 	for root, dirs, files in os.walk(os.path.abspath("Database/"+first_level_in_database[i])):
 		for file in files:
-			second_level.append(str(i)+os.path.join(root, file))
+			second_level.append(os.path.join(root, file))
 
 if not os.path.exists("Caffe_Files"):
     os.makedirs("Caffe_Files")
@@ -22,7 +24,7 @@ try:
 except OSError:
     pass
 
-final_label = -1
+final_label = 0
 tmp_label = 0
 full_database_file= open("Caffe_Files/full_database.txt", "w+")
 for i in range(0,len(second_level)):
@@ -36,6 +38,6 @@ for i in range(0,len(second_level)):
         if label2 != tmp_label:
             tmp_label=label2
             final_label+=1
-        full_database_file.write(second_level[i][1:]+" "+str(final_label)+"\n")
+        full_database_file.write(second_level[i]+" "+str(final_label)+"\n")
 
 full_database_file.close()
