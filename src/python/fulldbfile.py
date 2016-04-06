@@ -38,6 +38,7 @@ for i in range(0,len(second_level)):
         if label2 != tmp_label:
             tmp_label=label2
             final_label+=1
-        full_database_file.write(second_level[i]+" "+str(final_label)+"\n")
+	if 'Label' in second_level[i]: # In order not to have problematic files like .DS_STORE in the database
+	        full_database_file.write(second_level[i]+" "+str(final_label)+"\n")
 
 full_database_file.close()
