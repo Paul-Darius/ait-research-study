@@ -9,11 +9,11 @@ k=0
 for (dirpath, dirnames, filenames) in os.walk("Database"):
     first_level_in_database.extend(dirnames)
     break
-
+first_level_in_database=sorted(first_level_in_database)
 # Name of the file in each directory
 for i in range(0,len(first_level_in_database)):
 	for root, dirs, files in os.walk(os.path.abspath("Database/"+first_level_in_database[i])):
-		for file in files:
+		for file in sorted(files):
 			second_level.append(os.path.join(root, file))
 
 if not os.path.exists("Caffe_Files"):

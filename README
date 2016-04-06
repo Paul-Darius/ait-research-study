@@ -73,12 +73,12 @@ Files generation from train.txt and test.txt. For this usage, you should have do
 -> Then :
 for name in Database/*/*.jpg; do
 convert -resize 256x256\! $name $name
-echo $name
 done
 
 The goal is to resize the images of the database. Modify the path “Database/*/*.jpg” if necessary.
 
 -> ./src/siamese/train_siamese_mbk.sh for training
+-> python src/siamese/analyse.py for testing
 —————————————————————————
 
 Creator/Contributor : Paul-Darius Sarmadi <sarmadipauldarius@gmail.com> 2016

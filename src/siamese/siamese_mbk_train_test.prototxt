@@ -8,13 +8,8 @@ layer {
     phase: TRAIN
   }
   image_data_param {
-<<<<<<< HEAD
     source: "Database/Caffe_Files/train1.txt"
     batch_size: 20
-=======
-    source: "Database/Caffe_files/train1.txt"
-    batch_size: 320
->>>>>>> 44eb9095a6e268820bad423da9472311fa8d55e2
   }
 }
 
@@ -27,13 +22,8 @@ layer {
     phase: TRAIN
   }
   image_data_param {
-<<<<<<< HEAD
     source: "Database/Caffe_Files/train2.txt"
     batch_size: 20 
-=======
-    source: "Database/Caffe_files/train2.txt"
-    batch_size: 320
->>>>>>> 44eb9095a6e268820bad423da9472311fa8d55e2
   }
 }
 
