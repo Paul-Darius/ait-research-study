@@ -8,8 +8,8 @@ layer {
     phase: TRAIN
   }
   image_data_param {
-    source: "Database/Caffe_Files/train1.txt"
-    batch_size: 20
+    source: "Caffe_Files/train1.txt"
+    batch_size: 10
   }
 }
 
@@ -22,8 +22,8 @@ layer {
     phase: TRAIN
   }
   image_data_param {
-    source: "Database/Caffe_Files/train2.txt"
-    batch_size: 20 
+    source: "Caffe_Files/train2.txt"
+    batch_size: 10 
   }
 }
 
@@ -36,8 +36,8 @@ layer {
     phase: TEST
   }
   image_data_param {
-    source: "Database/Caffe_Files/test1.txt"
-    batch_size: 50 
+    source: "Caffe_Files/test1.txt"
+    batch_size: 10 
   }
 }
 
@@ -50,8 +50,8 @@ layer {
     phase: TEST
   }
   image_data_param {
-    source: "Database/Caffe_Files/test2.txt"
-    batch_size: 50
+    source: "Caffe_Files/test2.txt"
+    batch_size: 10
   }
 }
 
@@ -69,7 +69,7 @@ layer {
     lr_mult: 2
   }
   convolution_param {
-    num_output: 20
+    num_output: 10
     kernel_size: 5
     stride: 1
     weight_filler {
@@ -216,7 +216,7 @@ layer {
     lr_mult: 2
   }
   convolution_param {
-    num_output: 20
+    num_output: 10
     kernel_size: 5
     stride: 1
     weight_filler {

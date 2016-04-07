@@ -1,20 +1,9 @@
 # The train/test net protocol buffer definition
 net: "src/siamese/siamese_mbk_train_test.prototxt"
 test_initialization: false
-# test_iter specifies how many forward passes the test should carry out.
-<<<<<<< HEAD
-# In the case of MBK, we have test batch size 20 and 1729 test iterations,
-# covering almost all the testing images.
-test_iter: 1729
-# Carry out testing every 1000 training iterations.
-test_interval: 10000
-=======
-# In the case of MNIST, we have test batch size 100 and 100 test iterations,
-# covering the full 10,000 testing images.
-test_iter: 500
+test_iter: 100
 # Carry out testing every 500 training iterations.
-test_interval: 1000
->>>>>>> 44eb9095a6e268820bad423da9472311fa8d55e2
+test_interval: 500
 # The base learning rate, momentum and the weight decay of the network.
 base_lr: 0.01
 momentum: 0.9
@@ -26,9 +15,9 @@ power: 0.75
 # Display every 100 iterations
 display: 100
 # The maximum number of iterations
-max_iter: 50000
+max_iter: 100000
 # snapshot intermediate results
 snapshot: 5000
-snapshot_prefix: "src/siamese/siamese_mbk/"
+snapshot_prefix: "src/siamese/siamese_mbk/new"
 # solver mode: CPU or GPU
 solver_mode: GPU

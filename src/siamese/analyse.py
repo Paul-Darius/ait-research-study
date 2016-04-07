@@ -6,7 +6,7 @@ import caffe
 # Network
 caffe.set_device(0)
 caffe.set_mode_gpu()
-net = caffe.Net('src/siamese/siamese_mbk.prototxt', 'src/siamese/siamese_mbk/_iter_50000.caffemodel', caffe.TEST);
+net = caffe.Net('src/siamese/siamese_mbk.prototxt', 'src/siamese/siamese_mbk/new_iter_100000.caffemodel', caffe.TEST);
 
 train1 = open("Caffe_Files/train1.txt","r")
 train2 = open("Caffe_Files/train2.txt","r")
@@ -34,9 +34,11 @@ while 1:
 	im2 = im2.reshape(3,256,256)
 	net.blobs['data'].data[...] = im1
 	output1 = net.forward()
+	print output1
 	out1.append(output1['feat'])
 	net.blobs['data'].data[...] = im2
 	output2 = net.forward()
+	print output2
 	out2.append(output2['feat'])
 	expected.append(int(label1))
 	energy = (float)((output2['feat'][0][0]-output1['feat'][0][0])**2+(output1['feat'][0][1]-output2['feat'][0][1])**2)**(0.5)
