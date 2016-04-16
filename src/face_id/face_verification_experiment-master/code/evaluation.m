@@ -1,12 +1,12 @@
 % load data
 % load('../results/LightenedCNN_A_lfw.mat');      % model A
-load('../results/LightenedCNN_B_lfw.mat');      % model B
-load('lfw_pairs.mat');
+%load('../results/LightenedCNN_B_lfw.mat');      % model B
+%load('lfw_pairs.mat');
 
 % pos
 for i = 1: length(pos_pair)
-    feat1 = features(pos_pair(i, 1), :)';
-    feat2 = features(pos_pair(i, 2), :)';
+    feat1 = features(pos_pair( 1, i), :)';
+    feat2 = features(pos_pair(2, i), :)';
     pos_scores(i) = distance.compute_cosine_score(feat1, feat2);
 %     pos_scores(i) = -distance.compute_L2_score(feat1, feat2);
 end

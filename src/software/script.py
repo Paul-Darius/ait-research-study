@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import caffe
 from collections import OrderedDict
+import math
 
 ############ HERE I ASK FOR THE IMAGES AND I PREPROCESS THEM
 ######## THE FINAL RESULT IS CONTAINED IN THE ARRAY ADDRESS_OF_IMAGES_OF_CRIMINAL
@@ -26,7 +27,7 @@ address_of_images_of_criminal.append("criminal_pictures/3.jpg")
 
 ########### THEN I HAVE TO COMPUTE THE FEATURES OF THESE IMAGES
 
-###### I DEFINE A FUNCTION EXTRACTED FROM CAFE_FTR.PY WHICH WILL SAVE EVERYTHING IN 
+###### I DEFINE A FUNCTION EXTRACTED FROM CAFE_FTR.PY WHICH WILL RETURN THE ARRAY OF FEATURES CORRESPONDING TO  ADDRESS_OF_IMAGES_OF_CRIMINALS
 
 def extract_feature(network_proto_path,
                     network_model_path,
@@ -131,16 +132,45 @@ def extract_feature(network_proto_path,
     features = np.asarray(features, dtype='float32')
     return features
 
-features = extract_feature('../face_id/face_verification_experiment-master/proto/LightenedCNN_A_deploy.prototxt', '../face_id/face_verification_experiment-master/model/LightenedCNN_A.caffemodel', address_of_images_of_criminal, 'prob', 1)
+features_criminal = extract_feature('../face_id/face_verification_experiment-master/proto/LightenedCNN_A_deploy.prototxt', '../face_id/face_verification_experiment-master/model/LightenedCNN_A.caffemodel', address_of_images_of_criminal, 'prob', 1)
 
+##### THIS FUNCTION WILL BE NEEDED FOR SOME REASON
 
+def cosine_similarity(v1,v2):
+    "compute cosine similarity of v1 to v2: (v1 dot v2)/{||v1||*||v2||)"
+    sumxx, sumxy, sumyy = 0, 0, 0
+    for i in range(len(v1)):
+        x = v1[i]; y = v2[i]
+        sumxx += x*x
+        sumyy += y*y
+        sumxy += x*y
+    return sumxy/math.sqrt(sumxx*sumyy)
+
+########## NOW WE WORK ON THE FACE DETECTION
 cascPath = "../others/haarcascade_frontalface_alt.xml"
 faceCascade = cv2.CascadeClassifier(cascPath)
-video_capture = cv2.VideoCapture(0)
-'''
-while True:
+
+###### THOSE LINES WILL BE USED IN THE FINAL VERSION
+#print "What is the address of the video to be analyzed?"
+#address = raw_input()
+
+video_capture = cv2.VideoCapture("video/video1.avi")
+ret, frame = video_capture.read()
+if video_capture.isOpened():
+	print("Device Opened\n")
+	hey = video_capture.grab()
+	print hey
+	f, frame = video_capture.retrieve()
+	print frame.shape
+else:
+	print("Failed to open Device\n")
+
+
+
+while(video_capture.isOpened()):
     # Capture frame-by-frame
     ret, frame = video_capture.read()
+    print frame.shape
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     faces = faceCascade.detectMultiScale(
         gray,
@@ -151,8 +181,24 @@ while True:
     )
 
     # Draw a rectangle around the faces
+    i=0
     for (x, y, w, h) in faces:
-        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+    	roi = img[y:y+height, x:x+width]
+    	cv2.imwrite("face.png", roi)
+    	feats = extract_feature('../face_id/face_verification_experiment-master/proto/LightenedCNN_A_deploy.prototxt', '../face_id/face_verification_experiment-master/model/LightenedCNN_A.caffemodel', address_of_images_of_criminal, 'prob', 1)
+    	for f in feats:
+    		feat=f
+    	is_criminal=false
+    	for i in range(0,len(features_criminal)-1):
+    		if (cosine_similarity(feat,features_criminal[i])>0.1308):
+    			is_criminal= true
+    	if is_criminal==true:
+	        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+	    else:
+	    	cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 2)
+	    	font = cv2.FONT_HERSHEY_SIMPLEX
+	    	cv2.putText(frame,'CRIMINAL DETECTED',(x,y), font, 2,(0,0,255),2,cv2.LINE_AA)
+        i+=1
 
     # Display the resulting frame
     cv2.imshow('Video', frame)
