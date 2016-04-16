@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 import caffe
+from collections import OrderedDict
 
 ############ HERE I ASK FOR THE IMAGES AND I PREPROCESS THEM
 ######## THE FINAL RESULT IS CONTAINED IN THE ARRAY ADDRESS_OF_IMAGES_OF_CRIMINAL
@@ -42,7 +43,7 @@ def extract_feature(network_proto_path,
     save_path: The file path of extracted features to be saved.
     """
     #network_proto_path, network_model_path = network_path
-
+    print "hello"
     net = caffe.Classifier(network_proto_path, network_model_path)
     # net.set_phase_test()
 
@@ -54,8 +55,8 @@ def extract_feature(network_proto_path,
     #if data_mean is None:
         #data_mean = np.zeros(1)
     #net.transformer.set_mean('data', data_mean)
-    if not image_as_grey:
-        net.transformer.set_channel_swap('data', (2,1,0))  # the reference model has channels in BGR order instead of RGB
+    #if not image_as_grey:
+    #    net.transformer.set_channel_swap('data', (2,1,0))  # the reference model has channels in BGR order instead of RGB
 
     #net.set_input_scale('data', 256)  # the reference model operates on images in [0,255] range instead of [0,1]
     net.transformer.set_input_scale('data', 1)
@@ -130,8 +131,7 @@ def extract_feature(network_proto_path,
     features = np.asarray(features, dtype='float32')
     return features
 
-features = extract_feature(('../face_id/face_verification_experiment-master/proto/LightenedCNN_A_deploy.prototxt', '../face_id/face_verification_experiment-master/model/LightenedCNN_A.caffemodel', 	address_of_images_of_criminal.append(raw_input())
-, 'prob'))
+features = extract_feature('../face_id/face_verification_experiment-master/proto/LightenedCNN_A_deploy.prototxt', '../face_id/face_verification_experiment-master/model/LightenedCNN_A.caffemodel', address_of_images_of_criminal, 'prob', 1)
 
 
 cascPath = "../others/haarcascade_frontalface_alt.xml"
