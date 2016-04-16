@@ -154,7 +154,7 @@ faceCascade = cv2.CascadeClassifier(cascPath)
 #print "What is the address of the video to be analyzed?"
 #address = raw_input()
 
-video_capture = cv2.VideoCapture("video/video1.avi")
+video_capture = cv2.VideoCapture("video/small.mp4")
 ret, frame = video_capture.read()
 if video_capture.isOpened():
 	print("Device Opened\n")
@@ -165,48 +165,38 @@ if video_capture.isOpened():
 else:
 	print("Failed to open Device\n")
 
-
-
 while(video_capture.isOpened()):
-    # Capture frame-by-frame
-    ret, frame = video_capture.read()
-    print frame.shape
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    faces = faceCascade.detectMultiScale(
-        gray,
-        scaleFactor=1.1,
-        minNeighbors=5,
-        minSize=(30, 30),
-        flags=cv2.cv.CV_HAAR_SCALE_IMAGE
-    )
+	# Capture frame-by-frame
+	ret, frame = video_capture.read()
+	print frame.shape
+	gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+	faces = faceCascade.detectMultiScale(gray, scaleFactor=1.1,minNeighbors=5, minSize=(30, 30),flags=cv2.cv.CV_HAAR_SCALE_IMAGE)
 
-    # Draw a rectangle around the faces
-    i=0
-    for (x, y, w, h) in faces:
-    	roi = img[y:y+height, x:x+width]
-    	cv2.imwrite("face.png", roi)
-    	feats = extract_feature('../face_id/face_verification_experiment-master/proto/LightenedCNN_A_deploy.prototxt', '../face_id/face_verification_experiment-master/model/LightenedCNN_A.caffemodel', address_of_images_of_criminal, 'prob', 1)
-    	for f in feats:
-    		feat=f
-    	is_criminal=false
-    	for i in range(0,len(features_criminal)-1):
-    		if (cosine_similarity(feat,features_criminal[i])>0.1308):
-    			is_criminal= true
-    	if is_criminal==true:
-	        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
-	    else:
-	    	cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 2)
-	    	font = cv2.FONT_HERSHEY_SIMPLEX
-	    	cv2.putText(frame,'CRIMINAL DETECTED',(x,y), font, 2,(0,0,255),2,cv2.LINE_AA)
-        i+=1
+# Draw a rectangle around the faces
+	i=0
+	for (x, y, w, h) in faces:
+		roi = img[y:y+height, x:x+width]
+		cv2.imwrite("face.png", roi)
+		feats = extract_feature('../face_id/face_verification_experiment-master/proto/LightenedCNN_A_deploy.prototxt', '../face_id/face_verification_experiment-master/model/LightenedCNN_A.caffemodel', address_of_images_of_criminal, 'prob', 1)
+		for f in feats:
+			feat=f
+		is_criminal=false
+		for i in range(0,len(features_criminal)-1):
+			if (cosine_similarity(feat,features_criminal[i])>0.1308):
+				is_criminal= true
+			if is_criminal==true:
+				cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+			else:
+				cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 2)
+				font = cv2.FONT_HERSHEY_SIMPLEX
+				cv2.putText(frame,'CRIMINAL DETECTED',(x,y), font, 2,(0,0,255),2,cv2.LINE_AA)
+		i+=1
 
-    # Display the resulting frame
-    cv2.imshow('Video', frame)
-
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+	# Display the resulting frame
+	cv2.imshow('Video', frame)
+	if cv2.waitKey(1) & 0xFF == ord('q'):
+		break
 
 # When everything is done, release the capture
 video_capture.release()
 cv2.destroyAllWindows()
-'''
